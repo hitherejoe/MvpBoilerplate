@@ -41,7 +41,8 @@ public class DataManagerTest {
     @Test
     public void getPokemonListCompletesAndEmitsPokemonList() {
         List<NamedResource> namedResourceList = TestDataFactory.makeNamedResourceList(5);
-        MvpBoilerplateService.PokemonListResponse pokemonListResponse = new MvpBoilerplateService.PokemonListResponse();
+        MvpBoilerplateService.PokemonListResponse pokemonListResponse =
+                new MvpBoilerplateService.PokemonListResponse();
         pokemonListResponse.results = namedResourceList;
 
         when(mMockMvpBoilerplateService.getPokemonList(anyInt()))

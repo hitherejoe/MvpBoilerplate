@@ -22,7 +22,8 @@ public class MvpBoilerplateServiceFactory {
         return makeMvpBoilerplateService(okHttpClient, makeGson());
     }
 
-    public static MvpBoilerplateService makeMvpBoilerplateService(OkHttpClient okHttpClient, Gson gson) {
+    public static MvpBoilerplateService makeMvpBoilerplateService(OkHttpClient okHttpClient,
+                                                                  Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.POKEAPI_API_URL)
                 .client(okHttpClient)

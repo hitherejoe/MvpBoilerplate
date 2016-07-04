@@ -7,8 +7,6 @@ import com.hitherejoe.mvpboilerplate.data.remote.MvpBoilerplateService;
 import com.hitherejoe.mvpboilerplate.data.remote.MvpBoilerplateServiceFactory;
 import com.hitherejoe.mvpboilerplate.injection.ApplicationContext;
 
-import java.io.File;
-
 import javax.inject.Singleton;
 
 import dagger.Module;

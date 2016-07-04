@@ -59,7 +59,7 @@ public class DetailPresenter extends BasePresenter<DetailMvpView> {
                     public void onError(Throwable error) {
                         getMvpView().showProgress(false);
                         getMvpView().showError();
-                        Timber.e("There was a problem retrieving the pokemon...", error);
+                        Timber.e(error, "There was a problem retrieving the pokemon...");
                     }
                 }));
     }

@@ -3,8 +3,8 @@ package com.hitherejoe.mvpboilerplate.runner;
 import android.os.Bundle;
 import android.support.test.espresso.Espresso;
 
-import com.google.android.apps.secrets.util.RxIdlingExecutionHook;
-import com.google.android.apps.secrets.util.RxIdlingResource;
+import com.hitherejoe.mvpboilerplate.util.RxIdlingExecutionHook;
+import com.hitherejoe.mvpboilerplate.util.RxIdlingResource;
 
 import rx.plugins.RxJavaPlugins;
 

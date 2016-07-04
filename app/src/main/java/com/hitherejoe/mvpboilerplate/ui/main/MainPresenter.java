@@ -56,7 +56,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     public void onError(Throwable error) {
                         getMvpView().showProgress(false);
                         getMvpView().showError();
-                        Timber.e("There was an error retrieving the pokemon", error);
+                        Timber.e(error, "There was an error retrieving the pokemon");
                     }
                 }));
     }

@@ -3,6 +3,7 @@ package com.hitherejoe.mvpboilerplate.data;
 import com.hitherejoe.mvpboilerplate.data.model.NamedResource;
 import com.hitherejoe.mvpboilerplate.data.model.Pokemon;
 import com.hitherejoe.mvpboilerplate.data.remote.MvpBoilerplateService;
+import com.hitherejoe.mvpboilerplate.data.remote.MvpBoilerplateService.PokemonListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +26,18 @@ public class DataManager {
 
     public Single<List<String>> getPokemonList(int limit) {
         return mMvpBoilerplateService.getPokemonList(limit)
-                .flatMap(new Func1<MvpBoilerplateService.PokemonListResponse, Single<? extends List<String>>>() {
-                    @Override
-                    public Single<? extends List<String>> call(MvpBoilerplateService.PokemonListResponse pokemonListResponse) {
-                        List<String> pokemonNames = new ArrayList<>();
-                        for (NamedResource pokemon : pokemonListResponse.results) {
-                            pokemonNames.add(pokemon.name);
-                        }
-                        return Single.just(pokemonNames);
-                    }
-                });
+                .flatMap(new Func1<MvpBoilerplateService.PokemonListResponse,
+                        Single<? extends List<String>>>() {
+                            @Override
+                            public Single<? extends List<String>>
+                                    call(PokemonListResponse pokemonListResponse) {
+                                List<String> pokemonNames = new ArrayList<>();
+                                for (NamedResource pokemon : pokemonListResponse.results) {
+                                    pokemonNames.add(pokemon.name);
+                                }
+                                return Single.just(pokemonNames);
+                            }
+                        });
     }
 
     public Single<Pokemon> getPokemon(String name) {

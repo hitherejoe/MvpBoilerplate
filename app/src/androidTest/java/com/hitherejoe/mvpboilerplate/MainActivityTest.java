@@ -45,14 +45,14 @@ public class MainActivityTest {
     public TestRule chain = RuleChain.outerRule(component).around(main);
 
     @Test
-    public void checkPokemonDisplayAndAreScrollable() {
+    public void checkPokemonsDisplay() {
         List<NamedResource> namedResourceList = TestDataFactory.makeNamedResourceList(5);
         List<String> pokemonList = TestDataFactory.makePokemonNameList(namedResourceList);
         stubDataManagerGetPokemonList(Single.just(pokemonList));
         main.launchActivity(null);
 
-        for (String pokemonName : pokemonList) {
-            onView(withText(pokemonName))
+        for (NamedResource pokemonName : namedResourceList) {
+            onView(withText(pokemonName.name))
                     .check(matches(isDisplayed()));
         }
     }
@@ -77,17 +77,6 @@ public class MainActivityTest {
         stubDataManagerGetPokemonList(Single.<List<String>>error(new RuntimeException()));
         main.launchActivity(null);
         ErrorTestUtil.checkErrorViewsDisplay();
-    }
-
-    @Test
-    public void clickingReloadInErrorViewReloadsContent() {
-        stubDataManagerGetPokemonList(Single.<List<String>>error(new RuntimeException()));
-        main.launchActivity(null);
-
-        List<NamedResource> namedResourceList = TestDataFactory.makeNamedResourceList(5);
-        List<String> pokemonList = TestDataFactory.makePokemonNameList(namedResourceList);
-        stubDataManagerGetPokemonList(Single.just(pokemonList));
-        ErrorTestUtil.checkClickingReloadShowsContentWithText(pokemonList.get(0));
     }
 
     public void stubDataManagerGetPokemonList(Single<List<String>> single) {

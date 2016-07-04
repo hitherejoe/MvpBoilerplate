@@ -43,10 +43,8 @@ public class DetailActivityTest {
     public void checkPokemonDisplays() {
         Pokemon pokemon = TestDataFactory.makePokemon("id");
         stubDataManagerGetPokemon(Single.just(pokemon));
-        main.launchActivity(null);
-
-        onView(withText(pokemon.name))
-                .check(matches(isDisplayed()));
+        main.launchActivity(
+                DetailActivity.getStartIntent(InstrumentationRegistry.getContext(), pokemon.name));
 
         for (Statistic stat : pokemon.stats) {
             onView(withText(stat.stat.name))
@@ -57,18 +55,10 @@ public class DetailActivityTest {
     @Test
     public void checkErrorViewDisplays() {
         stubDataManagerGetPokemon(Single.<Pokemon>error(new RuntimeException()));
-        main.launchActivity(null);
-        ErrorTestUtil.checkErrorViewsDisplay();
-    }
-
-    @Test
-    public void clickingReloadInErrorViewReloadsContent() {
-        stubDataManagerGetPokemon(Single.<Pokemon>error(new RuntimeException()));
-        main.launchActivity(null);
-
         Pokemon pokemon = TestDataFactory.makePokemon("id");
-        stubDataManagerGetPokemon(Single.just(pokemon));
-        ErrorTestUtil.checkClickingReloadShowsContentWithText(pokemon.name);
+        main.launchActivity(
+                DetailActivity.getStartIntent(InstrumentationRegistry.getContext(), pokemon.name));
+        ErrorTestUtil.checkErrorViewsDisplay();
     }
 
     public void stubDataManagerGetPokemon(Single<Pokemon> single) {
